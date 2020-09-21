@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    align-items: center;
+    background-color: #eeeeee;
+    display: flex;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    font-weight: bold;
+}

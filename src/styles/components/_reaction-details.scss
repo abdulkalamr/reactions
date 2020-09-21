@@ -1,0 +1,36 @@
+.reaction-details-overlay {
+    align-items: center;
+    background-color: #ccc;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+}
+
+.reaction-details-container {
+    background-color: #333;
+    border-radius: 4px;
+    width: 500px
+}
+
+.reaction-details-topbar {
+    display: flex;
+    padding: 0 20px;
+}
+
+.reaction-details-summary {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.reaction-detail-summary-item {
+    padding: 10px 0;
+}
+
+.reaction-details-close {
+    padding: 10px 0;
+}
