@@ -1,4 +1,4 @@
-export const getReactions = (userContentReactions, reactions, users, contentID = 1) => {
+export const getReactions = (userContentReactions, reactions, users, contentID) => {
     const contentSpecificReactions = {};
 
     const emojiMap = {};
@@ -17,6 +17,10 @@ export const getReactions = (userContentReactions, reactions, users, contentID =
     });
 
     userContentReactions.forEach((userContentReaction) => {
+        if (userContentReaction.content_id !== contentID) {
+            return;
+        }
+
         const emoji = emojiMap[userContentReaction.reaction_id];
 
         if (!contentSpecificReactions[emoji].users) {
@@ -35,7 +39,12 @@ export const getTopReactions = (reactions) => {
 };
 
 export const getReactionCount = (reactions) => {
-    return 30;
+    const reactionDetails = Object.values(reactions);
+    const reactionCount = reactionDetails.reduce((count, reactionDetail) => {
+        const userCount = Object.keys(reactionDetail.users).length;
+        return count + userCount;
+    }, 0);
+    return reactionCount;
 };
 
 export const getDetailSummary = (reactions) => {
@@ -63,6 +72,5 @@ export const getUsers = (reactions, reaction) => {
 export const getUserNames = (reactions, reaction) => {
     const userDetails = Object.values(reactions[reaction].users);
     const userNames = userDetails.map((userDetail) => userDetail.name);
-    console.log(userNames);
     return userNames;
 };

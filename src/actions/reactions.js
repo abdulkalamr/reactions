@@ -18,8 +18,13 @@ export const startSetReactions = () => {
 
         return Promise.all([reactionsPromise, reactionDetailsPromise, usersPromise])
             .then(([ userContentReactions, reactionDetails, users ]) => {
-                const reactions = getReactions(userContentReactions, reactionDetails, users);
+                const reactions = getReactions(userContentReactions, reactionDetails, users, 1);
                 dispatch(setReactions(reactions));
             });
     }
 }; 
+
+export const setReaction = (reaction) => ({
+    type: 'SET_REACTION',
+    reaction
+});
