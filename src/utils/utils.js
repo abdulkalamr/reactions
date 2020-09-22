@@ -8,20 +8,24 @@ export const getReactions = (userContentReactions, reactions, users, contentID =
         emojiMap[id] = emoji;
     });
 
-    const userNameMap = {};
-    users.forEach(({ id, first_name, last_name }) => {
-        userNameMap[id] = `${first_name} ${last_name}`;
+    const userMap = {};
+    users.forEach(({ id, first_name, last_name, avatar }) => {
+        userMap[id] = {
+            name: `${first_name} ${last_name}`,
+            avatar
+        };
     });
 
     userContentReactions.forEach((userContentReaction) => {
         const emoji = emojiMap[userContentReaction.reaction_id];
-        const userName = userNameMap[userContentReaction.user_id];
 
         if (!contentSpecificReactions[emoji].users) {
-            contentSpecificReactions[emoji].users = [];    
+            contentSpecificReactions[emoji].users = {};    
         }
-        
-        contentSpecificReactions[emoji].users.push(userName);
+
+        const userID = userContentReaction.user_id;
+        const user = userMap[userID];
+        contentSpecificReactions[emoji].users[userID] = user;
     });
     return contentSpecificReactions;
 };
@@ -36,20 +40,29 @@ export const getReactionCount = (reactions) => {
 
 export const getDetailSummary = (reactions) => {
     const detailSummary = Object.entries(reactions).map(([emoji, details]) => ([emoji, details.users.length]));
-    console.log(detailSummary);
     return detailSummary;
 };
 
-export const getList = (reactions, reaction) => {
+export const getUsers = (reactions, reaction) => {
     if (reaction === 'all') {
-        let list = [];
+        const users = {};
 
         Object.values(reactions).forEach((reactionDetails) => {
-            list = list.concat(reactionDetails.users)
+            reactionDetails.users
+            for (const [userID, userDetails] of Object.entries(reactionDetails.users)) {
+                users[userID] = userDetails;
+            }
         });
 
-        return list;
+        return Object.values(users);
     }
 
-    return reactions[reaction].users;
+    return Object.values(reactions[reaction].users);
+};
+
+export const getUserNames = (reactions, reaction) => {
+    const userDetails = Object.values(reactions[reaction].users);
+    const userNames = userDetails.map((userDetail) => userDetail.name);
+    console.log(userNames);
+    return userNames;
 };

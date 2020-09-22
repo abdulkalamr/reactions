@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getList } from '../utils/utils';
+import { getUsers } from '../utils/utils';
 
 const ReactionDetailsList = ({ list }) => {
     return (
         <div>
-            {list.map((user) => (
-                <div key={user}>
-                    {user}
+            {list.map((user, index) => (
+                <div key={index}>
+                    {user.name}
                 </div>
             ))}
         </div>
@@ -16,7 +16,7 @@ const ReactionDetailsList = ({ list }) => {
 
 const mapStateToProps = (state) => {
     return {
-        list: getList(state.reactions, state.options.reaction)
+        list: getUsers(state.reactions, state.options.reaction)
     };
 };
 
