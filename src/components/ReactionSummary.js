@@ -4,7 +4,8 @@ import ReactionSummaryItem from './ReactionSummaryItem';
 import { getTopReactions, getReactionCount } from '../utils/utils';
 
 const ReactionSummary = ({ reactions, reactionCount, setDetailsOpen }) => (
-    <div 
+    <div
+        className="summary-container" 
         onClick={() => {
             setDetailsOpen(true);
         }}

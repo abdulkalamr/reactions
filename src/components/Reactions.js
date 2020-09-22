@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import ReactionSummary from './ReactionSummary';
 import ReactionDetails from './ReactionDetails';
+import Trigger from './Trigger';
+import Tooltip from './Tooltip';
 
 export default () => {
     const [isDetailsOpen, setDetailsOpen] = useState(false);
 
     return (
-        <div className="reactions-container">
+        <div>
             <ReactionSummary 
                 setDetailsOpen={setDetailsOpen}
             />
@@ -14,6 +16,8 @@ export default () => {
                 isDetailsOpen={isDetailsOpen}
                 setDetailsOpen={setDetailsOpen}
             />
+            <Trigger />
+            <Tooltip />
         </div>
     );
 };

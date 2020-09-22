@@ -1,22 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getUserNames } from '../utils/utils';
+import { setHovered } from '../actions/options'
 
-const ReactionSummaryItem = ({ name, reaction, userNames }) => (
-    <div className="reaction-summary-item">
-        {reaction}
-        <div className="reaction-summary-tooltip">
-            <h3 className="reaction-summary-tooltip-title">{ name }</h3>
-            <ul>
-                {userNames.map((userName) => <li key={userName}>{userName}</li>)}
-            </ul>
+const ReactionSummaryItem = ({ reaction, setHovered }) => {
+    const handleMouseEnter = () => {
+        setHovered(reaction);
+    };
+
+    return (
+        <div 
+            className="reaction-summary-item" 
+            data-tip data-for="userlist"
+            onMouseEnter={handleMouseEnter}
+        >
+            {reaction}
         </div>
-    </div>
-);
+    );
+};
 
-const mapStateToProps = (state, props) => ({
-    name: state.reactions[props.reaction].name,
-    userNames: getUserNames(state.reactions, props.reaction)
+const mapDispatchToProps = (dispatch) => ({
+    setHovered: (hovered) => dispatch(setHovered(hovered))
 });
 
-export default connect(mapStateToProps)(ReactionSummaryItem);
+export default connect(undefined, mapDispatchToProps)(ReactionSummaryItem);

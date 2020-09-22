@@ -1,29 +1,6 @@
-.reactions-container {
-    background-color: #444444;
-    padding: 5px 10px;
-}
-
-.reactions-container:hover {
-    cursor: pointer;
-}
-
 .reaction-summary-item {
     display: inline-block;
     position: relative;
-}
-
-.reaction-summary-tooltip {
-    background-color: black;
-    border-radius: 1.6rem;
-    color: #fff;
-    padding: 5px 10px;
-    position: absolute;
-    visibility: hidden;
-    width: max-content;
-}
-
-.reaction-summary-item:hover .reaction-summary-tooltip {
-    visibility: visible;
 }
 
 .reaction-summary-tooltip-title {

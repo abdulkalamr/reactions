@@ -1,5 +1,6 @@
 const optionsReducerDefaultState = {
-    reaction: 'all' // reaction --> selected tab in reaction details popup
+    reaction: 'all', // reaction --> selected tab in reaction details popup
+    hovered: null // hovered item in summary
 };
 
 export default (state = optionsReducerDefaultState, action) => {
@@ -9,6 +10,12 @@ export default (state = optionsReducerDefaultState, action) => {
                 ...state,
                 reaction: action.reaction
             };
+
+        case 'SET_HOVERED':
+            return {
+                ...state,
+                hovered: action.hovered
+            }
 
         default:
             return state;

@@ -69,8 +69,24 @@ export const getUsers = (reactions, reaction) => {
     return Object.values(reactions[reaction].users);
 };
 
-export const getUserNames = (reactions, reaction) => {
-    const userDetails = Object.values(reactions[reaction].users);
+export const getUserNames = (reactions, emoji) => {
+    if (!reactions[emoji]) {
+        return [];
+    }
+
+    const userDetails = Object.values(reactions[emoji].users);
     const userNames = userDetails.map((userDetail) => userDetail.name);
     return userNames;
 };
+
+export const getEmojiNameMap = (reactions) => {
+    const emojiNameMap = {};
+    for (const [emoji, emojiDetails] of Object.entries(reactions)) {
+        emojiNameMap[emoji] = emojiDetails.name;
+    }
+    return emojiNameMap;
+};
+
+export const getEmojiName = (reactions, emoji) => {
+    return reactions[emoji] ? reactions[emoji].name : null;
+}; 
