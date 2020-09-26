@@ -10,7 +10,9 @@ body {
     align-items: center;
     background-color: #eeeeee;
     display: flex;
+    flex-direction: column;
     font-family: Helvetica, Arial, sans-serif;
+    gap: 4.8rem;
     font-size: $m-size;
     justify-content: center;
     min-height: 100vh;
